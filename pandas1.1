@@ -1,0 +1,18 @@
+import numpy as np
+import pandas as pd
+# 20 випадкових чисел
+data_20 = np.random.randint(1, 101, size=20)
+# текстові індекси
+indices_20 = [f"item_{i}" for i in range(1, 21)]
+
+series_1 = pd.Series(data_20, index=indices_20)
+print(series_1)
+
+max_idx = series_1.idxmax()
+max_val = series_1.max()
+
+min_idx = series_1.idxmin()
+min_val = series_1.min()
+
+print(f"Максимальне значення: {max_val} (індекс: {max_idx})")
+print(f"Мінімальне значення: {min_val} (індекс: {min_idx})")
