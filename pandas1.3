@@ -1,0 +1,25 @@
+import numpy as np
+import pandas as pd
+
+population_dict = {
+    "Київ": 2950000,
+    "Харків": 1420000,
+    "Одеса": 1010000,
+    "Дніпро": 970000,
+    "Львів": 720000,
+    "Запоріжжя": 710000,
+}
+
+city_series = pd.Series(population_dict)
+print("-- Населення міст --")
+print(city_series)
+
+max_city = city_series.idxmax()
+min_city = city_series.idxmin()
+
+print(
+    f"Місто з найбільшим населенням: {max_city} ({city_series[max_city]} )"
+)
+print(
+    f"Місто з найменшим населенням: {min_city} ({city_series[min_city]} )"
+)
