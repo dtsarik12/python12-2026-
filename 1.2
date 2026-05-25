@@ -1,0 +1,10 @@
+import numpy as np
+import pandas as pd
+
+# 15 випадкових чисел
+data_15 = np.random.rand(15)
+indices_15 = list("abcdefghijklmno")
+series_2 = pd.Series(data_15, index=indices_15)
+
+print(f"Максимальне значення: {series_2.max()}")
+print(f"Мінімальне значення: {series_2.min()}")
