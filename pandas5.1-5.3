@@ -1,0 +1,76 @@
+import io
+import pandas as pd
+
+students_data = """student_id,name,group,year,faculty,city
+1,Anna,A1,1,Physics,Kyiv
+2,Bohdan,A1,2,Physics,Lviv
+3,Iryna,B2,1,Math,Kyiv
+4,Oleh,B2,3,Math,Odesa
+5,Maria,C1,2,IT,Kharkiv
+6,Dmytro,C1,4,IT,Kyiv
+7,Olena,A2,1,Physics,Lviv
+8,Andrii,A2,2,Physics,Kyiv
+9,Natalia,B3,3,Math,Dnipro
+10,Yurii,C2,1,IT,Odesa
+11,Svitlana,C2,2,IT,Kyiv
+12,Petro,B3,4,Math,Lviv"""
+
+scores_data = """student_id,subject,semester,score,teacher
+1,Math,1,90,Petrenko
+1,Physics,1,88,Ivanenko
+2,Math,2,72,Petrenko
+2,Physics,2,75,Ivanenko
+3,Math,1,85,Petrenko
+3,Physics,1,92,Ivanenko
+4,Physics,3,65,Ivanenko
+5,Math,2,78,Shevchenko
+5,Informatics,2,82,Koval
+6,Informatics,4,91,Koval
+7,Physics,1,87,Ivanenko
+8,Math,2,69,Petrenko
+9,Math,3,74,Petrenko
+9,Physics,3,70,Ivanenko
+10,Informatics,1,88,Koval
+11,Informatics,2,93,Koval
+13,Math,1,80,Petrenko
+14,Physics,2,76,Ivanenko"""
+
+df_students = pd.read_csv(io.StringIO(students_data))
+df_scores = pd.read_csv(io.StringIO(scores_data))
+
+# ЗАВДАННЯ 3.5.1
+df_inner = pd.merge(df_students, df_scores, on="student_id", how="inner")
+
+lost_students = df_students[~df_students["student_id"].isin(df_inner["student_id"])]
+
+lost_scores = df_scores[~df_scores["student_id"].isin(df_inner["student_id"])]
+
+print(" ЗАВДАННЯ 3.5.1 ")
+print("--втрачені студенти (не мають оцінок у таблиці scores)--")
+print(lost_students[["student_id", "name"]])
+
+print("\n--втрачені оцінки (виставлені для неіснуючих ID студентів)--")
+print(lost_scores)
+
+# ЗАВДАННЯ 3.5.2
+df_left = pd.merge(df_students, df_scores, on="student_id", how="left")
+
+# шукає 'score' є пустим (isna)
+students_without_scores = df_left[df_left["score"].isna()]
+
+result_352 = students_without_scores[["name", "group", "faculty"]].drop_duplicates()
+
+print("\n ЗАВДАННЯ 3.5.2 ")
+print("--студенти, які не мають жодної оцінки--")
+print(result_352)
+
+# ЗАВДАННЯ 3.5.3
+df_merged = pd.merge(df_students, df_scores, on="student_id")
+
+df_it = df_merged[df_merged["faculty"] == "IT"]
+
+average_scores_it = df_it.groupby("subject")["score"].mean()
+
+print("\n ЗАВДАННЯ 3.5.3")
+print("--середній бал з предметів для факультету IT--")
+print(average_scores_it)
