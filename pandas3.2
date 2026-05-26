@@ -1,0 +1,24 @@
+import io
+import pandas as pd
+
+csv_data = """day,temperature,humidity
+Mon,12,60
+Tue,15,55
+Wed,14,58
+Thu,18,50
+Fri,16,52"""
+
+df_temp = pd.read_csv(io.StringIO(csv_data))
+print("--початковий DataFrame--")
+print(df_temp)
+
+average_temp = df_temp["temperature"].mean()
+print(f"\nСередня температура: {average_temp}°C")
+
+df_temp_modified = df_temp.drop(columns=["humidity"])
+
+print("\n--DataFrame після видалення стовпця--")
+print(df_temp_modified)
+
+df_temp_modified.to_csv("temperature_modified.csv", index=False)
+print("\nРезультат успішно збережено у 'temperature_modified.csv'")
