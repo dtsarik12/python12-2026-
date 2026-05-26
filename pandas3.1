@@ -1,0 +1,22 @@
+import io
+import pandas as pd
+
+csv_data = """time,position,velocity,acceleration
+0,0.0,1.2,0.1
+1,1.2,1.3,0.1
+2,2.5,1.4,0.2
+3,3.9,1.5,0.2
+4,5.4,1.6,0.3"""
+
+df_motion = pd.read_csv(io.StringIO(csv_data))
+
+print("--перші 5 рядків--")
+print(df_motion.head(5))
+
+df_motion_modified = df_motion.drop(columns=["acceleration"])
+
+print("\n--після видалення стовпця--")
+print(df_motion_modified)
+
+df_motion_modified.to_csv("motion_modified.csv", index=False)
+print("\nрезультат успішно збережено у 'motion_modified.csv'")
