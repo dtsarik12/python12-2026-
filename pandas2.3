@@ -1,0 +1,22 @@
+import pandas as pd
+
+data = {
+    "ID_Студ": ["S01", "S02", "S03"],
+    "Ім'я": ["Марко", "Ігор", "Марія"],
+    "Бал": [68, 88, 92],
+}
+df_3 = pd.DataFrame(data)
+
+print("--Початковий DataFrame--")
+print(df_3)
+
+# inplace=True або присвоєння змінній потрібні, щоб зберегти зміни
+df_3_indexed = df_3.set_index("ID_Студ")
+
+print("\n--Після set_index--")
+print(df_3_indexed)
+
+df_3_restored = df_3_indexed.reset_index()
+
+print("\n--Після reset_index()--")
+print(df_3_restored)
