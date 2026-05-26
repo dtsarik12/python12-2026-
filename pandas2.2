@@ -1,0 +1,14 @@
+import numpy as np
+import pandas as pd
+
+np_array = np.random.uniform(0, 1, size=(5, 3))
+df_2 = pd.DataFrame(np_array)
+
+print("--Початковий DataFrame--")
+print(df_2)
+
+new_column_names = ["Параметр_1", "Параметр_2", "Параметр_3"]
+df_2.columns = new_column_names
+
+print("\n--DataFrame після--")
+print(df_2)
