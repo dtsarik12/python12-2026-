@@ -1,0 +1,13 @@
+import numpy as np
+import pandas as pd
+
+# генерує матрицю та конвертує у список
+matrix_data = np.random.randint(10, 100, size=(12, 4)).tolist()
+
+columns_4 = [f"Col_{chr(65 + i)}" for i in range(4)]
+rows_12 = [f"Row_{i}" for i in range(1, 13)]
+
+df_1 = pd.DataFrame(matrix_data, index=rows_12, columns=columns_4)
+
+print("--DataFrame 12x4--")
+print(df_1)
