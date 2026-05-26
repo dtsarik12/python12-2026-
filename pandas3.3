@@ -1,0 +1,22 @@
+import io
+import pandas as pd
+
+csv_data = """day,customers,revenue
+Mon,120,3500
+Tue,135,3900
+Wed,110,3000
+Thu,150,4200"""
+
+df_sales = pd.read_csv(io.StringIO(csv_data))
+print("--- Початковий DataFrame ---")
+print(df_sales)
+
+# 2. Сортування даних за revenue у спадному порядку
+df_sales_sorted = df_sales.sort_values(by="revenue", ascending=False)
+
+print("\n--- Відсортований DataFrame (за спаданням виручки) ---")
+print(df_sales_sorted)
+
+# 3. Збереження відсортованих даних у новий CSV-файл
+df_sales_sorted.to_csv("sales_sorted.csv", index=False)
+print("\nРезультат успішно збережено у 'sales_sorted.csv'")
